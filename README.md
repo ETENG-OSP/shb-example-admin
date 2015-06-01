@@ -16,6 +16,12 @@ Static HTML Builder 制作管理界面的例子，使用之前请参考：http:/
   ```
   
 2. 将项目链接到 Static HTML Builder 的 app 目录下
-  ```
+  ```bash
   ln -s shb-example-admin/ static-html-builder/app
+  ```
+  
+3. 初始化项目
+  ```bash
+  cd static-html-builder
+  grunt init
   ```
