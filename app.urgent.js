@@ -1,4 +1,4 @@
-$('body').addClass('skin-blue fixed');
+$('body').addClass('skin-blue sidebar-mini');
 $('body > ui-view').addClass('wrapper');
 
 angular.module('app', [
