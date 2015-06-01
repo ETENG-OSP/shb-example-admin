@@ -23,5 +23,6 @@ Static HTML Builder 制作管理界面的例子，使用之前请参考：http:/
 3. 初始化项目
   ```bash
   cd static-html-builder
+  npm install
   grunt init
   ```
