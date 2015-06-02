@@ -3,16 +3,7 @@
   <section class="sidebar">
 
     <!-- Sidebar user panel (optional) -->
-    <div class="user-panel">
-      <div class="pull-left image">
-        <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
-      </div>
-      <div class="pull-left info">
-        <p>Alexander Pierce</p>
-        <!-- Status -->
-        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-      </div>
-    </div>
+    <slidebar-user-panel></slidebar-user-panel>
 
     <!-- search form (Optional) -->
     <form action="#" method="get" class="sidebar-form">
@@ -27,22 +18,31 @@
 
     <!-- Sidebar Menu -->
     <ul class="sidebar-menu" ng-controller="AppController as app">
-      <li class="header">导航</li>
+      <li class="header">导航菜单</li>
 
-      <li ng-repeat="module in app.modules">
-        <a ui-sref="{{ module.name }}">
+      <li ng-repeat="module in modules" ui-sref-active="active">
+        <a ui-srefx="{{ module.name }}">
           <i class="fa fa-link"></i>
           <span ng-bind="module.label"></span>
         </a>
+
+        <ul ng-if="module.items" class="treeview-menu">
+          <li ng-repeat="submodule in module.items">
+            <a ui-srefx="{{ submodule.name }}">
+              <i class="fa fa-link"></i>
+              <span ng-bind="submodule.label"></span>
+            </a>
+          </li>
+        </ul>
       </li>
 
       <!-- Optionally, you can add icons to the links -->
-      <!-- <li class="active"><a href="#"><i class='fa fa-link'></i> <span>Link</span></a></li>
+      <!-- <li><a href="#"><i class='fa fa-link'></i> <span>Link</span></a></li>
       <li><a href="#"><i class='fa fa-link'></i> <span>Another Link</span></a></li>
       <li class="treeview">
         <a href="#"><i class='fa fa-link'></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">
-          <li><a href="#">Link in level 2</a></li>
+          <li class="active"><a href="#">Link in level 2</a></li>
           <li><a href="#">Link in level 2</a></li>
         </ul>
       </li> -->

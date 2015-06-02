@@ -1,10 +1,9 @@
-$('body').addClass('skin-blue sidebar-mini');
+$('body').addClass('skin-green sidebar-mini');
 $('body > ui-view').addClass('wrapper');
 
 angular.module('app', [
   'app.user',
   'app.order',
-  // 'app.product',
   'ui.router'
 ]).config(config).run(run)
   .directive('adminHeader', AdminHeader)
@@ -39,7 +38,9 @@ function config($stateProvider, $urlRouterProvider) {
   $stateProvider.state('root', {
     abstract: true,
     url: '/root',
-    templateUrl: 'partials/root.html'
+    templateUrl: 'partials/root.html',
+    controller: 'AppController',
+    controllerAs: 'app'
   });
 }
 
@@ -47,10 +48,26 @@ function config($stateProvider, $urlRouterProvider) {
  * @ngInject
  */
 function AppController($state) {
+
   var vm = this;
-  vm.modules = $state.get().filter(function (state) {
-    return !state.abstract;
-  });
+
+  vm.modules = [
+    {
+      label: '人员管理'
+    },
+    {
+      label: '订单管理',
+      items: [
+        {
+          label: '未发货'
+        },
+        {
+          label: '已完成'
+        }
+      ]
+    }
+  ];
+
   return;
 }
 
@@ -68,11 +85,19 @@ function AdminHeader() {
 function AdminSidebar() {
   return {
     templateUrl: 'partials/sidebar.html',
-    link: link
+    link: link,
+    scope: {
+      modules: '='
+    }
   };
 
   function link(scope, element) {
-    $.AdminLTE.tree('.sidebar', element);
+    var sidebar = $('.sidebar', element);
+    scope.$watch('modules', function (modules) {
+      setTimeout(function () {
+        $.AdminLTE.tree(sidebar);
+      });
+    });
   }
 }
 

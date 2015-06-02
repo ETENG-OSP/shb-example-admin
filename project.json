@@ -13,7 +13,7 @@
     "admin-lte": [
       "dist/css/AdminLTE.css",
       "dist/js/app.js",
-      "dist/css/skins/skin-blue.css"
+      "dist/css/skins/skin-green.css"
     ]
   },
   "proxies": {
