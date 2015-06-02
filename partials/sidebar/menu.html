@@ -1,0 +1,21 @@
+<ul class="sidebar-menu" ng-controller="AppController as app">
+  
+  <li class="header">导航菜单</li>
+
+  <li ng-repeat="module in modules" ui-sref-active="active">
+    <a ui-srefx="{{ module.name }}">
+      <i class="fa fa-link"></i>
+      <span ng-bind="module.label"></span>
+    </a>
+
+    <ul ng-if="module.items" class="treeview-menu">
+      <li ng-repeat="submodule in module.items">
+        <a ui-srefx="{{ submodule.name }}">
+          <i class="fa fa-link"></i>
+          <span ng-bind="submodule.label"></span>
+        </a>
+      </li>
+    </ul>
+  </li>
+
+</ul>

@@ -6,11 +6,14 @@ angular.module('app', [
   'app.order',
   'ui.router'
 ]).config(config).run(run)
-  .directive('adminHeader', AdminHeader)
-  .directive('adminSidebar', AdminSidebar)
-  .directive('adminContent', AdminContent)
-  .directive('adminFooter', AdminFooter)
-  .directive('adminControl', AdminControl)
+  .directive('adminHeader', AdminHeaderDirective)
+  .directive('adminSidebar', AdminSidebarDirective)
+  .directive('adminContent', AdminContentDirective)
+  .directive('adminFooter', AdminFooterDirective)
+  .directive('adminControl', AdminControlDirective)
+  .directive('sidebarSearchForm', SidebarSearchFormDirective)
+  .directive('sidebarMenu', SidebarMenuDirective)
+  .directive('sidebarUserPanel', SidebarUserPanelDirective)
   .controller('AppController', AppController);
 
 /**
@@ -18,15 +21,10 @@ angular.module('app', [
  */
 function run($rootScope) {
   $rootScope.$on('$viewContentLoaded', handleViewContentLoaded);
-  $rootScope.$on('aaaa', handleAaaa);
   return;
 
   function handleViewContentLoaded() {
     $.AdminLTE.layout.activate();
-  }
-
-  function handleAaaa() {
-    $.AdminLTE.pushMenu.expand();
   }
 }
 
@@ -71,7 +69,39 @@ function AppController($state) {
   return;
 }
 
-function AdminHeader() {
+function SidebarUserPanelDirective() {
+  return {
+    templateUrl: 'partials/sidebar/user-panel.html'
+  };
+}
+
+function SidebarSearchFormDirective() {
+  return {
+    templateUrl: 'partials/sidebar/search-form.html'
+  };
+}
+
+function SidebarMenuDirective() {
+  return {
+    templateUrl: 'partials/sidebar/menu.html',
+    controller: 'AppController',
+    controllerAs: 'app',
+    link: link,
+    scope: {
+      modules: '='
+    }
+  };
+
+  function link(scope, element) {
+    scope.$watch('modules', function (modules) {
+      setTimeout(function () {
+        $.AdminLTE.tree(element);
+      });
+    });
+  }
+}
+
+function AdminHeaderDirective() {
   return {
     templateUrl: 'partials/header.html',
     link: link
@@ -82,26 +112,13 @@ function AdminHeader() {
   }
 }
 
-function AdminSidebar() {
+function AdminSidebarDirective() {
   return {
-    templateUrl: 'partials/sidebar.html',
-    link: link,
-    scope: {
-      modules: '='
-    }
+    templateUrl: 'partials/sidebar.html'
   };
-
-  function link(scope, element) {
-    var sidebar = $('.sidebar', element);
-    scope.$watch('modules', function (modules) {
-      setTimeout(function () {
-        $.AdminLTE.tree(sidebar);
-      });
-    });
-  }
 }
 
-function AdminContent() {
+function AdminContentDirective() {
   return {
     templateUrl: 'partials/content.html',
     link: link
@@ -111,7 +128,7 @@ function AdminContent() {
   }
 }
 
-function AdminFooter() {
+function AdminFooterDirective() {
   return {
     templateUrl: 'partials/footer.html',
     link: link
@@ -122,7 +139,7 @@ function AdminFooter() {
   }
 }
 
-function AdminControl() {
+function AdminControlDirective() {
   return {
     templateUrl: 'partials/control.html',
     link: link

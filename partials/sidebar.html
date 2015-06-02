@@ -1,53 +1,17 @@
 <aside class="main-sidebar">
+  
   <!-- sidebar: style can be found in sidebar.less -->
   <section class="sidebar">
 
     <!-- Sidebar user panel (optional) -->
-    <slidebar-user-panel></slidebar-user-panel>
+    <sidebar-user-panel></sidebar-user-panel>
 
     <!-- search form (Optional) -->
-    <form action="#" method="get" class="sidebar-form">
-      <div class="input-group">
-        <input type="text" name="q" class="form-control" placeholder="Search..."/>
-        <span class="input-group-btn">
-          <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
-        </span>
-      </div>
-    </form>
-    <!-- /.search form -->
+    <sidebar-search-form></sidebar-search-form>
 
     <!-- Sidebar Menu -->
-    <ul class="sidebar-menu" ng-controller="AppController as app">
-      <li class="header">导航菜单</li>
+    <sidebar-menu modules="app.modules"></sidebar-menu>
 
-      <li ng-repeat="module in modules" ui-sref-active="active">
-        <a ui-srefx="{{ module.name }}">
-          <i class="fa fa-link"></i>
-          <span ng-bind="module.label"></span>
-        </a>
-
-        <ul ng-if="module.items" class="treeview-menu">
-          <li ng-repeat="submodule in module.items">
-            <a ui-srefx="{{ submodule.name }}">
-              <i class="fa fa-link"></i>
-              <span ng-bind="submodule.label"></span>
-            </a>
-          </li>
-        </ul>
-      </li>
-
-      <!-- Optionally, you can add icons to the links -->
-      <!-- <li><a href="#"><i class='fa fa-link'></i> <span>Link</span></a></li>
-      <li><a href="#"><i class='fa fa-link'></i> <span>Another Link</span></a></li>
-      <li class="treeview">
-        <a href="#"><i class='fa fa-link'></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
-        <ul class="treeview-menu">
-          <li class="active"><a href="#">Link in level 2</a></li>
-          <li><a href="#">Link in level 2</a></li>
-        </ul>
-      </li> -->
-
-    </ul><!-- /.sidebar-menu -->
   </section>
 
 </aside>
