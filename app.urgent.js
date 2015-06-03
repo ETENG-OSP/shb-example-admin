@@ -1,11 +1,9 @@
-$('body').addClass('skin-green sidebar-mini');
-$('body > ui-view').addClass('wrapper');
-
 angular.module('app', [
   'app.user',
   'app.order',
   'ui.router'
 ]).config(config).run(run)
+  .directive('icheck', ICheckDirective)
   .directive('adminHeader', AdminHeaderDirective)
   .directive('adminSidebar', AdminSidebarDirective)
   .directive('adminContent', AdminContentDirective)
@@ -15,6 +13,20 @@ angular.module('app', [
   .directive('sidebarMenu', SidebarMenuDirective)
   .directive('sidebarUserPanel', SidebarUserPanelDirective)
   .controller('AppController', AppController);
+
+function ICheckDirective() {
+  return {
+    link: link
+  };
+
+  function link(scope, element) {
+    element.iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' // optional
+    });
+  }
+}
 
 /**
  * @ngInject
@@ -32,14 +44,46 @@ function run($rootScope) {
  * @ngInject
  */
 function config($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('/root/user');
-  $stateProvider.state('root', {
+  $urlRouterProvider.otherwise('/login');
+
+  $stateProvider.state('admin', {
     abstract: true,
-    url: '/root',
+    url: '/admin',
     templateUrl: 'partials/root.html',
     controller: 'AppController',
-    controllerAs: 'app'
+    controllerAs: 'app',
+    onEnter: enterRoot,
+    onExit: exitRoot
   });
+
+  $stateProvider.state('login', {
+    url: '/login',
+    templateUrl: 'views/login/login-box.html',
+    onEnter: enterLogin,
+    onExit: exitLogin
+  });
+
+  return;
+
+  function enterRoot() {
+    setTimeout(function () {
+      $('body').addClass('skin-green sidebar-mini');
+      $('body > ui-view').addClass('wrapper');
+    });
+  }
+
+  function exitRoot() {
+    $('body').removeClass('skin-green sidebar-mini');
+    $('body > ui-view').removeClass('wrapper');
+  }
+
+  function enterLogin() {
+    $('body').addClass('login-page');
+  }
+
+  function exitLogin() {
+    $('body').removeClass('login-page');
+  }
 }
 
 /**

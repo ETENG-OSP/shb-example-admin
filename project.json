@@ -7,13 +7,18 @@
     "admin-lte": "~2.1.1",
     "angular-ui-router": "~0.2.15",
     "slimscroll": "~1.3.3",
-    "ionicons": "~2.0.1"
+    "ionicons": "~2.0.1",
+    "icheck": "~1.0.2"
   },
   "overrides": {
     "admin-lte": [
       "dist/css/AdminLTE.css",
       "dist/js/app.js",
       "dist/css/skins/skin-green.css"
+    ],
+    "icheck": [
+      "icheck.js",
+      "skins/square/blue.css"
     ]
   },
   "proxies": {

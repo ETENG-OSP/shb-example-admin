@@ -1,9 +1,9 @@
 angular.module('app.user', ['ui.router']).config(config);
 
 function config($stateProvider) {
-  $stateProvider.state('root.order', {
-    url: '/order',
+  $stateProvider.state('admin.user', {
+    url: '/user',
     label: '订单管理',
-    templateUrl: 'views/order.html'
+    templateUrl: 'views/user.html'
   });
 }
