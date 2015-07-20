@@ -19,6 +19,10 @@
     "icheck": [
       "icheck.js",
       "skins/square/blue.css"
+    ],
+    "bootstrap": [
+      "dist/js/bootstrap.js",
+      "dist/css/bootstrap.css"
     ]
   },
   "proxies": {
