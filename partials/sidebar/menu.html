@@ -10,7 +10,7 @@
 
     <ul ng-if="module.items" class="treeview-menu">
       <li ng-repeat="submodule in module.items">
-        <a ui-srefx="{{ submodule.name }}">
+        <a ui-sref="{{ submodule.name }}">
           <i class="fa fa-link"></i>
           <span ng-bind="submodule.label"></span>
         </a>
